@@ -1,23 +1,47 @@
 import ReactEcharts from "echarts-for-react"
 
 const options = {
-  grid: { top: 20, right: 40, bottom: 20, left: 40 },
-  xAxis: {
-    type: "category",
-    data: ["Item 1", "Item 2", "Item 3", "Item 4", "Item 5"]
+  angleAxis: {
+    max: 2,
+    startAngle: 30,
+    splitLine: {
+      show: false
+    }
   },
-  yAxis: {
-    type: "value"
+  radiusAxis: {
+    type: 'category',
+    data: ['v', 'w', 'x', 'y', 'z'],
+    z: 10
   },
+  polar: {},
   series: [
     {
-      data: [400, 300, 350, 200, 280],
-      type: "bar",
-      smooth: true
+      type: 'bar',
+      data: [4, 3, 2, 1, 0],
+      coordinateSystem: 'polar',
+      name: 'Without Round Cap',
+      itemStyle: {
+        borderColor: 'red',
+        opacity: 0.8,
+        borderWidth: 1
+      }
+    },
+    {
+      type: 'bar',
+      data: [4, 3, 2, 1, 0],
+      coordinateSystem: 'polar',
+      name: 'With Round Cap',
+      roundCap: true,
+      itemStyle: {
+        borderColor: 'green',
+        opacity: 0.8,
+        borderWidth: 1
+      }
     }
   ],
-  tooltip: {
-    trigger: "axis"
+  legend: {
+    show: true,
+    data: ['Without Round Cap', 'With Round Cap']
   }
 }
 
@@ -25,7 +49,7 @@ function App() {
   return (
     <ReactEcharts
       option={options}
-      style={{ width: "600px", height: "300px" }}
+      style={{ width: "800px", height: "800px" }}
     ></ReactEcharts>
   )
 }
